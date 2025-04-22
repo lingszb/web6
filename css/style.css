@@ -1,0 +1,241 @@
+/* 全局样式 */
+body {
+    font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 容器样式 */
+.login-container, .welcome-container, .password-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 10px;
+    padding: 30px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    margin: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.3s ease;
+}
+
+/* 标题样式 */
+h2 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* 表单样式 */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #34495e;
+    font-weight: 500;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+}
+
+/* 复选框容器 */
+.remember-me {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.remember-me input {
+    margin-right: 8px;
+}
+
+/* 按钮样式 */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* 链接样式 */
+.register-link, .login-link, .forgot-link {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #7f8c8d;
+}
+
+.register-link a, .login-link a, .forgot-link a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.register-link a:hover, .login-link a:hover, .forgot-link a:hover {
+    color: #2980b9;
+    text-decoration: underline;
+}
+
+/* 错误和信息消息 */
+.error-message {
+    background-color: #ffecec;
+    color: #e74c3c;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-left: 4px solid #e74c3c;
+}
+
+.info-message {
+    background-color: #e8f4f8;
+    color: #3498db;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: left;
+    border-left: 4px solid #3498db;
+}
+
+/* 登录提示样式 */
+.login-tip {
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    cursor: pointer;
+}
+
+.help-icon {
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-weight: bold;
+    line-height: 22px;
+    margin-right: 10px;
+    font-style: italic;
+}
+
+.tip-text {
+    color: #666;
+    font-size: 14px;
+}
+
+.login-tip:hover .help-icon {
+    background-color: #2980b9;
+}
+
+.login-tip:hover .tip-text {
+    text-decoration: underline;
+    color: #333;
+}
+
+/* 登出链接 */
+.logout-link {
+    display: inline-block;
+    margin-top: 25px;
+    padding: 10px 20px;
+    background-color: #e74c3c;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s;
+}
+
+.logout-link:hover {
+    background-color: #c0392b;
+}
+
+/* 历史记录样式 */
+.history-section {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.history-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+}
+
+.history-list li {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eaeaea;
+    background-color: #f9f9f9;
+    transition: background-color 0.2s;
+}
+
+.history-list li:hover {
+    background-color: #f1f1f1;
+}
+
+.history-list li:last-child {
+    border-bottom: none;
+}
+
+.history-list li.error {
+    background-color: #fff4f1;
+    color: #e74c3c;
+}
+
+/* 背景动画效果 */
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+    .login-container, .welcome-container, .password-container {
+        padding: 20px;
+    }
+    
+    button {
+        padding: 10px;
+    }
+}
