@@ -35,7 +35,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>修改密码 - 用户管理系统</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        /* 添加密码容器特定样式 */
+        .password-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(4px);
+            border-radius: 10px;
+            padding: 30px;
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            margin: 20px;
+        }
+        
+        .login-link {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .login-link a {
+            color: #3498db;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <div class="password-container">

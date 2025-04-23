@@ -25,6 +25,13 @@
             infoMessage = "显示消息时出错";
         }
     }
+    
+    // 检查用户是否已登录，如果已登录则重定向到欢迎页面
+    String username = (String) session.getAttribute("username");
+    if (username != null && !username.isEmpty()) {
+        response.sendRedirect("welcome.jsp");
+        return;
+    }
 %>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -32,7 +39,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>用户登录</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <style>
         body {
             display: flex;
@@ -153,8 +160,6 @@
         </div>
         <% } %>
         
-       
-        
         <form action="login_action.jsp" method="post">
             <div class="form-group">
                 <label for="username">用户名</label>
@@ -166,6 +171,11 @@
                 <input type="password" id="password" name="password" required>
             </div>
             
+            <div class="remember-me">
+                <input type="checkbox" id="rememberMe" name="rememberMe" value="true">
+                <label for="rememberMe" style="display: inline;">记住我（3天内自动登录）</label>
+            </div>
+            
             <button type="submit" class="submit-btn">登录</button>
         </form>
 
@@ -175,7 +185,7 @@
             <a href="change_password.jsp">忘记密码?</a>
         </div>
 
-         <div class="message" style="background-color: #e2f0fb; color: #0c5460; border: 1px solid #bee5eb;">
+        <div class="message" style="background-color: #e2f0fb; color: #0c5460; border: 1px solid #bee5eb;">
             <i>提示：本系统cookie仅保存3天，过期后请重新输入用户名及密码重新验证登录！</i>
         </div>
         
