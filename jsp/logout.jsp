@@ -4,6 +4,12 @@
     // 获取当前用户名(如果存在)，用于显示在退出消息中
     String username = (String) session.getAttribute("username");
     
+    // 清除用户名 Cookie
+    Cookie usernameCookie = new Cookie("username", "");
+    usernameCookie.setMaxAge(0); // 设置为0表示立即删除
+    usernameCookie.setPath(request.getContextPath().length() > 0 ? request.getContextPath() : "/"); // 确保路径匹配
+    response.addCookie(usernameCookie);
+    
     // 清除会话中的所有属性
     session.invalidate();
     

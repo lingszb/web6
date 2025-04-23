@@ -26,6 +26,17 @@
         }
     }
     
+    // 获取注册成功消息
+    String successMessage = request.getParameter("success");
+    if (successMessage != null) {
+        try {
+            successMessage = URLDecoder.decode(successMessage, "UTF-8");
+        } catch (Exception e) {
+            // 静默处理解码错误
+            successMessage = "显示消息时出错";
+        }
+    }
+    
     // 检查用户是否已登录，如果已登录则重定向到欢迎页面
     String username = (String) session.getAttribute("username");
     if (username != null && !username.isEmpty()) {
@@ -160,15 +171,21 @@
         </div>
         <% } %>
         
+        <% if (successMessage != null) { %>
+        <div class="message info">
+            <%= successMessage %>
+        </div>
+        <% } %>
+        
         <form action="login_action.jsp" method="post">
             <div class="form-group">
                 <label for="username">用户名</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" placeholder="请输入您的用户名" required>
             </div>
             
             <div class="form-group">
                 <label for="password">密码</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" placeholder="请输入您的密码" required>
             </div>
             
             <div class="remember-me">

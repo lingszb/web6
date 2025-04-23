@@ -85,6 +85,39 @@
                                     
                                     // 如果上次登录在3天内，自动登录
                                     if (diffDays < 3) {
+                                        // 获取或创建登录历史记录
+                                        List<String> loginHistory = new ArrayList<>();
+                                        
+                                        // 检查XML中是否已有登录历史记录并读取现有记录
+                                        NodeList loginHistoryNodes = userElement.getElementsByTagName("loginHistory");
+                                        Element loginHistoryElement = null;
+                                        
+                                        if (loginHistoryNodes.getLength() > 0) {
+                                            loginHistoryElement = (Element) loginHistoryNodes.item(0);
+                                            NodeList loginNodes = loginHistoryElement.getElementsByTagName("login");
+                                            for (int j = 0; j < loginNodes.getLength(); j++) {
+                                                loginHistory.add(loginNodes.item(j).getTextContent());
+                                            }
+                                        } else {
+                                            // 如果没有登录历史节点，创建一个
+                                            loginHistoryElement = doc.createElement("loginHistory");
+                                            userElement.appendChild(loginHistoryElement);
+                                        }
+                                        
+                                        // 添加当前登录时间到XML中
+                                        Element loginElement = doc.createElement("login");
+                                        loginElement.setTextContent(currentTime);
+                                        loginHistoryElement.appendChild(loginElement);
+                                        
+                                        // 同时添加到内存中的登录历史列表
+                                        loginHistory.add(currentTime);
+                                        
+                                        // 降序排序（最近的在前）
+                                        Collections.sort(loginHistory, Collections.reverseOrder());
+                                        
+                                        // 保存会话中的登录历史
+                                        session.setAttribute("loginHistory", loginHistory);
+                                        
                                         // 保存更新后的XML
                                         javax.xml.transform.TransformerFactory transformerFactory = 
                                             javax.xml.transform.TransformerFactory.newInstance();
@@ -107,52 +140,6 @@
                                         
                                         session.setAttribute("cookie_set_time", String.valueOf(cookieSetTime));
                                         session.setAttribute("cookie_max_age", String.valueOf(COOKIE_MAX_AGE_SECONDS));
-                                        
-                                        // 获取或创建登录历史记录
-                                        List<String> loginHistory = new ArrayList<>();
-                                        
-                                        // 检查XML中是否已有登录历史记录
-                                        NodeList loginHistoryNodes = userElement.getElementsByTagName("loginHistory");
-                                        if (loginHistoryNodes.getLength() > 0) {
-                                            // 读取已有的登录历史
-                                            Element loginHistoryElement = (Element) loginHistoryNodes.item(0);
-                                            NodeList entries = loginHistoryElement.getElementsByTagName("entry");
-                                            for (int j = 0; j < entries.getLength(); j++) {
-                                                loginHistory.add(entries.item(j).getTextContent());
-                                            }
-                                        } else {
-                                            // 如果没有登录历史节点，创建一个
-                                            Element loginHistoryElement = doc.createElement("loginHistory");
-                                            userElement.appendChild(loginHistoryElement);
-                                        }
-                                        
-                                        // 添加当前登录时间（ISO格式）
-                                        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS");
-                                        String currentLoginTime = isoFormat.format(currentDate);
-                                        loginHistory.add(currentLoginTime);
-                                        
-                                        // 更新XML中的登录历史
-                                        Element loginHistoryElement = null;
-                                        NodeList historyNodeList = userElement.getElementsByTagName("loginHistory");
-                                        if (historyNodeList.getLength() > 0) {
-                                            loginHistoryElement = (Element) historyNodeList.item(0);
-                                            // 清除旧记录
-                                            while (loginHistoryElement.hasChildNodes()) {
-                                                loginHistoryElement.removeChild(loginHistoryElement.getFirstChild());
-                                            }
-                                        } else {
-                                            loginHistoryElement = doc.createElement("loginHistory");
-                                            userElement.appendChild(loginHistoryElement);
-                                        }
-                                        
-                                        // 添加历史记录到XML
-                                        for (String entry : loginHistory) {
-                                            Element entryElement = doc.createElement("entry");
-                                            entryElement.setTextContent(entry);
-                                            loginHistoryElement.appendChild(entryElement);
-                                        }
-                                        
-                                        session.setAttribute("loginHistory", loginHistory);
                                         
                                         // 重定向到欢迎页面
                                         response.sendRedirect("jsp/welcome.jsp");

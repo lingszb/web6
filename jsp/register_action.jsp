@@ -195,7 +195,7 @@
         try {
             if (addUserXml(request, username.trim(), password)) {
                 // 注册成功
-                message = "注册成功！现在您可以登录了。";
+                message = "恭喜您，注册成功！请使用您的新账号和密码登录。";
                 redirectPage = "login.jsp"; // 成功后重定向到登录页面
                 error = false; // 表示成功
             } else {
